@@ -17,17 +17,17 @@ import Foundation
 /// A floating-point numeric storage type.
 public protocol FloatingPointStorage: SignedNumericStorage where Element: FloatingPoint {
 
-    /// Creates a new storage with all elements rounded to the closest possible representation.
-    ///
-    /// - Parameter value: The integer storage to convert to a floating-point storage.
-    init<Source>(_ value: Source) where Source: NumericStorage, Source.Element: BinaryInteger
+//    /// Creates a new storage with all elements rounded to the closest possible representation.
+//    ///
+//    /// - Parameter value: The integer storage to convert to a floating-point storage.
+//    init<Source>(_ value: Source) where Source: NumericStorage, Source.Element: BinaryInteger
 
-    /// Creates a new storage, if the given integer storage can be represented exactly.
-    ///
-    /// If the given integer storage cannot be represented exactly, the result is `nil`.
-    ///
-    /// - Parameter value: The integer storage to convert to a floating-point storage.
-    init?<Source>(exactly value: Source) where Source: NumericStorage, Source.Element: BinaryInteger
+//    /// Creates a new storage, if the given integer storage can be represented exactly.
+//    ///
+//    /// If the given integer storage cannot be represented exactly, the result is `nil`.
+//    ///
+//    /// - Parameter value: The integer storage to convert to a floating-point storage.
+//    init?<Source>(exactly value: Source) where Source: NumericStorage, Source.Element: BinaryInteger
 
     /// Positive infinity.
     ///
@@ -102,15 +102,15 @@ public protocol FloatingPointStorage: SignedNumericStorage where Element: Floati
 
 extension FloatingPointStorage {
 
-    @inlinable public init<Source>(_ source: Source) where Source: NumericStorage, Source.Element: BinaryInteger {
-        self.init(source.map(Element.init))
-    }
+//    @inlinable public init<Source>(_ source: Source) where Source: NumericStorage, Source.Element: BinaryInteger {
+//        self.init(source.map(Element.init))
+//    }
 
-    @inlinable public init?<Source>(exactly: Source) where Source: NumericStorage, Source.Element: BinaryInteger {
-        let convertedElements = exactly.compactMap(Element.init(exactly:))
-        guard convertedElements.count == exactly.count else { return nil }
-        self.init(convertedElements)
-    }
+//    @inlinable public init?<Source>(exactly: Source) where Source: NumericStorage, Source.Element: BinaryInteger {
+//        let convertedElements = exactly.compactMap(Element.init(exactly:))
+//        guard convertedElements.count == exactly.count else { return nil }
+//        self.init(convertedElements)
+//    }
 
     @inlinable public static var infinity: Self { .init(.infinity) }
 

@@ -68,7 +68,7 @@ final class CXInt32x3Tests: XCTestCase {
 
     func testConvertFromFloat32x3() {
         let fromStorage = CXFloat32x3Make(2.49, 0.51, 1.5)
-        let storage = CXInt32x3FromCXFloat32x3(fromStorage)
+        let storage = CXInt32x3FromFloat32x3(fromStorage)
 
         XCTAssertEqual(CXInt32x3GetElement(storage, 0), 2)
         XCTAssertEqual(CXInt32x3GetElement(storage, 1), 1)
@@ -77,7 +77,7 @@ final class CXInt32x3Tests: XCTestCase {
 
     func testConvertFromUInt32x3() {
         let fromStorage = CXUInt32x3Make(2, 5, .max)
-        let storage = CXInt32x3FromCXUInt32x3(fromStorage)
+        let storage = CXInt32x3FromUInt32x3(fromStorage)
 
         XCTAssertEqual(CXInt32x3GetElement(storage, 0), 2)
         XCTAssertEqual(CXInt32x3GetElement(storage, 1), 5)
@@ -112,9 +112,9 @@ final class CXInt32x3Tests: XCTestCase {
         let normal = CXInt32x3Make(-1, 0, 3)
         let absolute = CXInt32x3Absolute(normal)
 
-        XCTAssertEqual(CXUInt32x3GetElement(absolute, 0), 1)
-        XCTAssertEqual(CXUInt32x3GetElement(absolute, 1), 0)
-        XCTAssertEqual(CXUInt32x3GetElement(absolute, 2), 3)
+        XCTAssertEqual(CXInt32x3GetElement(absolute, 0), 1)
+        XCTAssertEqual(CXInt32x3GetElement(absolute, 1), 0)
+        XCTAssertEqual(CXInt32x3GetElement(absolute, 2), 3)
     }
 
     func testNegate() {

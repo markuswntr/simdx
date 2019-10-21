@@ -60,7 +60,7 @@ final class CXFloat32x2Tests: XCTestCase {
 
     func testConvertFromFloat64x2() {
         let fromStorage = CXFloat64x2Make(2.11199999999999, 1.54321987654321)
-        let storage = CXFloat32x2FromCXFloat64x2(fromStorage)
+        let storage = CXFloat32x2FromFloat64x2(fromStorage)
 
         XCTAssertEqual(CXFloat32x2GetElement(storage, 0), 2.11199999999999)
         XCTAssertEqual(CXFloat32x2GetElement(storage, 1), 1.54321987654321)
@@ -68,7 +68,7 @@ final class CXFloat32x2Tests: XCTestCase {
 
     func testConvertFromInt32x2() {
         let fromStorage = CXInt32x2Make(-2, 1)
-        let storage = CXFloat32x2FromCXInt32x2(fromStorage)
+        let storage = CXFloat32x2FromInt32x2(fromStorage)
 
         XCTAssertEqual(CXFloat32x2GetElement(storage, 0), -2.00000000000000)
         XCTAssertEqual(CXFloat32x2GetElement(storage, 1), 1.00000000000000)
@@ -76,7 +76,7 @@ final class CXFloat32x2Tests: XCTestCase {
 
     func testConvertFromUInt32x2() {
         let fromStorage = CXUInt32x2Make(2, 5)
-        let storage = CXFloat32x2FromCXUInt32x2(fromStorage)
+        let storage = CXFloat32x2FromUInt32x2(fromStorage)
 
         XCTAssertEqual(CXFloat32x2GetElement(storage, 0), 2)
         XCTAssertEqual(CXFloat32x2GetElement(storage, 1), 5)
@@ -84,7 +84,7 @@ final class CXFloat32x2Tests: XCTestCase {
 
     func testConvertFromInt64x2() {
         let fromStorage = CXInt64x2Make(-34, 12)
-        let storage = CXFloat32x2FromCXInt64x2(fromStorage)
+        let storage = CXFloat32x2FromInt64x2(fromStorage)
 
         XCTAssertEqual(CXFloat32x2GetElement(storage, 0), -34)
         XCTAssertEqual(CXFloat32x2GetElement(storage, 1), 12)
@@ -92,7 +92,7 @@ final class CXFloat32x2Tests: XCTestCase {
 
     func testConvertFromUInt64x2() {
         let fromStorage = CXUInt64x2Make(34, 12)
-        let storage = CXFloat32x2FromCXUInt64x2(fromStorage)
+        let storage = CXFloat32x2FromUInt64x2(fromStorage)
 
         XCTAssertEqual(CXFloat32x2GetElement(storage, 0), 34)
         XCTAssertEqual(CXFloat32x2GetElement(storage, 1), 12)

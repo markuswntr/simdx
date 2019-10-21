@@ -15,25 +15,11 @@
 import Foundation
 import CSIMDX
 
-public struct Int32x2: RawStorage2, FixedWidthIntegerStorage, SignedIntegerStorage {
-
-    // MARK: Collection
-
-    @inlinable public var count: Int { 2 }
-    @inlinable public var startIndex: Int32 { 0 }
-    @inlinable public var endIndex: Int32 { 2 }
-
-    // MARK: RawValue
-
-    public var rawValue: CXInt32x2
+extension Int32x2: RawStorage2, FixedWidthIntegerStorage, SignedIntegerStorage {
 
     @inlinable public subscript(index: Int32) -> Int32 {
-        @inlinable set { CXInt32x2SetElement(&rawValue, index, newValue) }
-        @inlinable get { CXInt32x2GetElement(rawValue, index) }
-    }
-
-    @inlinable public init(rawValue: CXInt32x2) {
-        self.rawValue = rawValue
+        @inlinable set { CXInt32x2SetElement(&self, index, newValue) }
+        @inlinable get { CXInt32x2GetElement(self, index) }
     }
 }
 
@@ -41,16 +27,16 @@ public struct Int32x2: RawStorage2, FixedWidthIntegerStorage, SignedIntegerStora
 extension Int32x2 {
 
     @inlinable public init(_ repeatingElement: Int32) {
-        self.init(rawValue: CXInt32x2MakeRepeatingElement(repeatingElement))
+        self = CXInt32x2MakeRepeatingElement(repeatingElement)
     }
 
     @inlinable public init(_ index0: Int32, _ index1: Int32) {
-        self.init(rawValue: CXInt32x2Make(index0, index1))
+        self = CXInt32x2Make(index0, index1)
     }
 
     @inlinable public init(_ array: [Int32]) {
         var array = array
-        self.init(rawValue: CXInt32x2MakeLoad(&array))
+        self = CXInt32x2MakeLoad(&array)
     }
 
     @inlinable public init<Other>(_ sequence: Other) where Other: Sequence, Other.Element == Int32 {
@@ -61,73 +47,49 @@ extension Int32x2 {
 // MARK: - Comparison
 extension Int32x2 {
 
-    @inlinable public static func minimum(_ lhs: Int32x2, _ rhs: Int32x2) -> Int32x2 {
-        .init(rawValue: CXInt32x2Minimum(lhs.rawValue, rhs.rawValue))
-    }
+    @inlinable public static func minimum(_ lhs: Int32x2, _ rhs: Int32x2) -> Int32x2 { CXInt32x2Minimum(lhs, rhs) }
 
-    @inlinable public static func maximum(_ lhs: Int32x2, _ rhs: Int32x2) -> Int32x2 {
-        .init(rawValue: CXInt32x2Maximum(lhs.rawValue, rhs.rawValue))
-    }
+    @inlinable public static func maximum(_ lhs: Int32x2, _ rhs: Int32x2) -> Int32x2 { CXInt32x2Maximum(lhs, rhs) }
 }
 
 // MARK: - Bitwise
 extension Int32x2 {
 
-    @inlinable public  prefix static func ~ (operand: Int32x2) -> Int32x2 {
-        return .init(rawValue: CXInt32x2BitwiseNot(operand.rawValue))
-    }
+    @inlinable public  prefix static func ~ (operand: Int32x2) -> Int32x2 { CXInt32x2BitwiseNot(operand) }
 
-    @inlinable public static func & (lhs: Int32x2, rhs: Int32x2) -> Int32x2 {
-        return .init(rawValue: CXInt32x2BitwiseAnd(lhs.rawValue, rhs.rawValue))
-    }
+    @inlinable public static func & (lhs: Int32x2, rhs: Int32x2) -> Int32x2 { CXInt32x2BitwiseAnd(lhs, rhs) }
 
-    @inlinable public static func | (lhs: Int32x2, rhs: Int32x2) -> Int32x2 {
-        return .init(rawValue: CXInt32x2BitwiseOr(lhs.rawValue, rhs.rawValue))
-    }
+    @inlinable public static func | (lhs: Int32x2, rhs: Int32x2) -> Int32x2 { CXInt32x2BitwiseOr(lhs, rhs) }
 
-    @inlinable public static func ^ (lhs: Int32x2, rhs: Int32x2) -> Int32x2 {
-        return .init(rawValue: CXInt32x2BitwiseExclusiveOr(lhs.rawValue, rhs.rawValue))
-    }
+    @inlinable public static func ^ (lhs: Int32x2, rhs: Int32x2) -> Int32x2 { CXInt32x2BitwiseExclusiveOr(lhs, rhs) }
 
     // MARK: Shifting
 
     @inlinable public static func >> <RHS>(lhs: Int32x2, rhs: RHS) -> Int32x2 where RHS: BinaryInteger {
-        return .init(rawValue: CXInt32x2ShiftLeft(lhs.rawValue, numericCast(rhs)))
+        CXInt32x2ShiftLeft(lhs, numericCast(rhs))
     }
 
     @inlinable public static func << <RHS>(lhs: Int32x2, rhs: RHS) -> Int32x2 where RHS: BinaryInteger {
-        return .init(rawValue: CXInt32x2ShiftRight(lhs.rawValue, numericCast(rhs)))
+        CXInt32x2ShiftRight(lhs, numericCast(rhs))
     }
 }
 
 // MARK: - Arithmetics
 extension Int32x2 {
 
-    @inlinable public static var zero: Int32x2 { .init(rawValue: CXInt32x2MakeZero()) }
+    @inlinable public static var zero: Int32x2 { CXInt32x2MakeZero() }
 
-    @inlinable public var magnitude: UInt32x2 { .init(rawValue: CXInt32x2Absolute(rawValue)) }
+    @inlinable public var magnitude: UInt32x2 { CXUInt32x2FromInt32x2(CXInt32x2Absolute(self)) }
 
     // MARK: Additive
 
-    @inlinable public static func + (lhs: Int32x2, rhs: Int32x2) -> Int32x2 {
-        .init(rawValue: CXInt32x2Add(lhs.rawValue, rhs.rawValue))
-    }
+    @inlinable public static func + (lhs: Int32x2, rhs: Int32x2) -> Int32x2 { CXInt32x2Add(lhs, rhs) }
 
-    @inlinable public static func - (lhs: Int32x2, rhs: Int32x2) -> Int32x2  {
-        .init(rawValue: CXInt32x2Subtract(lhs.rawValue, rhs.rawValue))
-    }
+    @inlinable public static func - (lhs: Int32x2, rhs: Int32x2) -> Int32x2  { CXInt32x2Subtract(lhs, rhs) }
 
-    @inlinable public static prefix func - (operand: Int32x2) -> Int32x2  {
-        .init(rawValue: CXInt32x2Negate(operand.rawValue))
-    }
-
-    @inlinable public mutating func negate() {
-        rawValue = CXInt32x2Negate(rawValue)
-    }
+    @inlinable public static prefix func - (operand: Int32x2) -> Int32x2  { CXInt32x2Negate(operand) }
 
     // MARK: Multiplicative
 
-    @inlinable public static func * (lhs: Int32x2, rhs: Int32x2) -> Int32x2  {
-        .init(rawValue: CXInt32x2Multiply(lhs.rawValue, rhs.rawValue))
-    }
+    @inlinable public static func * (lhs: Int32x2, rhs: Int32x2) -> Int32x2  { CXInt32x2Multiply(lhs, rhs) }
 }

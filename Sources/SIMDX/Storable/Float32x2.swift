@@ -15,25 +15,11 @@
 import Foundation
 import CSIMDX
 
-public struct Float32x2: RawStorage2, BinaryFloatingPointStorage {
-
-    // MARK: Collection
-
-    @inlinable public var count: Int { 2 }
-    @inlinable public var startIndex: Int32 { 0 }
-    @inlinable public var endIndex: Int32 { 2 }
-
-    // MARK: RawValue
-
-    public var rawValue: CXFloat32x2
+extension Float32x2: RawStorage2, BinaryFloatingPointStorage {
 
     @inlinable public subscript(index: Int32) -> Float32 {
-        @inlinable set { CXFloat32x2SetElement(&rawValue, index, newValue) }
-        @inlinable get { CXFloat32x2GetElement(rawValue, index) }
-    }
-
-    @inlinable public init(rawValue: CXFloat32x2) {
-        self.rawValue = rawValue
+        @inlinable set { CXFloat32x2SetElement(&self, index, newValue) }
+        @inlinable get { CXFloat32x2GetElement(self, index) }
     }
 }
 
@@ -41,16 +27,16 @@ public struct Float32x2: RawStorage2, BinaryFloatingPointStorage {
 extension Float32x2 {
 
     @inlinable public init(_ repeatingElement: Float32) {
-        self.init(rawValue: CXFloat32x2MakeRepeatingElement(repeatingElement))
+        self = CXFloat32x2MakeRepeatingElement(repeatingElement)
     }
 
     @inlinable public init(_ index0: Float32, _ index1: Float32) {
-        self.init(rawValue: CXFloat32x2Make(index0, index1))
+        self = CXFloat32x2Make(index0, index1)
     }
 
     @inlinable public init(_ array: [Float32]) {
         var array = array
-        self.init(rawValue: CXFloat32x2MakeLoad(&array))
+        self = CXFloat32x2MakeLoad(&array)
     }
 
     @inlinable public init<Other>(_ sequence: Other) where Other: Sequence, Other.Element == Float32 {
@@ -62,50 +48,34 @@ extension Float32x2 {
 extension Float32x2 {
 
     @inlinable public static func minimum(_ lhs: Float32x2, _ rhs: Float32x2) -> Float32x2 {
-        .init(rawValue: CXFloat32x2Minimum(lhs.rawValue, rhs.rawValue))
+        CXFloat32x2Minimum(lhs, rhs)
     }
 
     @inlinable public static func maximum(_ lhs: Float32x2, _ rhs: Float32x2) -> Float32x2 {
-        .init(rawValue: CXFloat32x2Maximum(lhs.rawValue, rhs.rawValue))
+        CXFloat32x2Maximum(lhs, rhs)
     }
 }
 
 // MARK: - Arithmetics
 extension Float32x2 {
 
-    @inlinable public static var zero: Float32x2 { .init(rawValue: CXFloat32x2MakeZero()) }
+    @inlinable public static var zero: Float32x2 { CXFloat32x2MakeZero() }
 
-    @inlinable public var magnitude: Float32x2 { .init(rawValue: CXFloat32x2Absolute(rawValue)) }
+    @inlinable public var magnitude: Float32x2 { CXFloat32x2Absolute(self) }
 
     // MARK: Additive
 
-    @inlinable public static func + (lhs: Float32x2, rhs: Float32x2) -> Float32x2 {
-        .init(rawValue: CXFloat32x2Add(lhs.rawValue, rhs.rawValue))
-    }
+    @inlinable public static func + (lhs: Float32x2, rhs: Float32x2) -> Float32x2 { CXFloat32x2Add(lhs, rhs) }
 
-    @inlinable public static func - (lhs: Float32x2, rhs: Float32x2) -> Float32x2  {
-        .init(rawValue: CXFloat32x2Subtract(lhs.rawValue, rhs.rawValue))
-    }
+    @inlinable public static func - (lhs: Float32x2, rhs: Float32x2) -> Float32x2  { CXFloat32x2Subtract(lhs, rhs) }
 
-    @inlinable public static prefix func - (operand: Float32x2) -> Float32x2  {
-        .init(rawValue: CXFloat32x2Negate(operand.rawValue))
-    }
-
-    @inlinable public mutating func negate() {
-        rawValue = CXFloat32x2Negate(rawValue)
-    }
+    @inlinable public static prefix func - (operand: Float32x2) -> Float32x2  { CXFloat32x2Negate(operand) }
 
     // MARK: Multiplicative
 
-    @inlinable public static func * (lhs: Float32x2, rhs: Float32x2) -> Float32x2  {
-        .init(rawValue: CXFloat32x2Multiply(lhs.rawValue, rhs.rawValue))
-    }
+    @inlinable public static func * (lhs: Float32x2, rhs: Float32x2) -> Float32x2  { CXFloat32x2Multiply(lhs, rhs) }
 
-    @inlinable public static func / (lhs: Float32x2, rhs: Float32x2) -> Float32x2  {
-        .init(rawValue: CXFloat32x2Divide(lhs.rawValue, rhs.rawValue))
-    }
+    @inlinable public static func / (lhs: Float32x2, rhs: Float32x2) -> Float32x2  { CXFloat32x2Divide(lhs, rhs) }
 
-    @inlinable public func squareRoot() -> Float32x2 {
-        .init(rawValue: CXFloat32x2SquareRoot(rawValue))
-    }
+    @inlinable public func squareRoot() -> Float32x2 { CXFloat32x2SquareRoot(self) }
 }

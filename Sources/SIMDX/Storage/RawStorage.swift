@@ -18,7 +18,7 @@ import Foundation
 ///
 /// Types conforming to this protocol are used to initialize a parallel processing
 /// optimized `SIMD` storage based on the `Element` type within the collection.
-public protocol RawStorage: RandomAccessCollection, MutableCollection, RawRepresentable where Index == Int32 {
+public protocol RawStorage: RandomAccessCollection, MutableCollection where Index == Int32 {
 
     /// Initialize to a SIMD storage with all elements equal to `repeatingElement`.
     init(_ repeatingElement: Element)

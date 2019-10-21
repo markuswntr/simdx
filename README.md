@@ -4,7 +4,7 @@
 **Neon on Arm**, in C (see `CSIMDX` target) and exposes them to Swift as generic types (see `SIMDX` target).
 Furthermore, *SIMDX* provides a fast and portable implementation of SIMD like intrinsics on **hardware which doesn't
 natively support** them, making *SIMDX* independent of the target hardware. Therefore it allows vector and matrix
-calculations on any (Swift supporting) hardware and automatically inlines the appropriate  intrinsic functions of the
+calculations on any (Swift supporting) hardware and automatically inlines the appropriate intrinsic functions of the
 target hardware.
 
 > **Warning.** Not meant to be used in production, created for learning purposes!
@@ -87,7 +87,7 @@ length, i.e. `float array[4]`.
 
 |         | Int8 | UInt8 | Int16 | UInt16 | Float16 | Int32 | UInt32 | Float32 | Int64 | UInt64 | Float64 |
 |--------:|------|-------|-------|--------|---------|-------|--------|---------|-------|--------|---------|
-|  64 bit |      |       |       |        |         |       |        |         |       |        |         |
+|  64 bit  |      |       |       |        |         |       |        |         |       |        |         |
 | 128 bit |      |       |       |        |         |       |        |         |       |        |         |
 | 256 bit |      |       |       |        |         |       |        |         |       |        |         |
 | 512 bit |      |       |       |        |         |       |        |         |       |        |         |
@@ -98,10 +98,12 @@ Move TODOs to Issues and/or a Project at some point
 
 - [x] Make `count` on SIMDX static
 - [ ] Extension on Array `init(SIMDX)` that uses native intrinsics store
+- [ ] Horizontal sum
 - [ ] Documentation
+- [ ] Comparison (Equal, GreaterThan, LowerThan, ...)
+- [ ] Move Storable structs into C and Swift Shim only
 - [ ] Int8, UInt8, Int16 and UInt16 storable
 - [ ] Boolean storage
-- [ ] Comparison (Equal, GreaterThan, LowerThan, ...)
 - [ ] 256-bit storage
 - [ ] Multi-dimensional storage (Matrix)
 - [ ] Extend conformance to the `Numeric` protocols
@@ -110,11 +112,13 @@ Move TODOs to Issues and/or a Project at some point
     - [ ] Instance from RandomNumberGenerator
     - [ ] Cast most vector types natively using intrinsics
 - [ ] 512-bit storage
+- [ ] Evaluate Float16
 - [x] Remove the ARM 64 requirement and any other platform restriction in Package.swift
 - [ ] Edge case tests
 - [ ] Not all intrinsics route through the fastest way possible. Re-visit and improve.
 - [ ] Re-evaluate the necessity of SIMDX being ExpressibleByArrayLiteral
 - [ ] The generic implementation is not the fastest it could be. Do some more magic.
+- [ ] OpenMP & OpenCL
 
 ## References 
 
@@ -133,6 +137,10 @@ re-visit them quite a lot so I leave them here.
 
 - https://github.com/QuantStack/xsimd
 - https://github.com/nemequ/simde
+
+### Things to come
+
+- https://thinkingandcomputing.com/posts/using-avx-instructions-in-matrix-multiplication.html
 
 ## License
 

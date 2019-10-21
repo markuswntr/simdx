@@ -44,13 +44,13 @@ extension SIMDX {
 
     /// Initialize to a SIMDX collection with all elements to `value`.
     @inlinable public init(repeating value: Element) {
-        self.init(rawValue: Storage.init(value))
+        self.init(rawValue: .init(value))
     }
 
     /// Initialize to a SIMDX collection with elements taken from `other` sequence.
     /// - Precondition: `other` must have the exact same count as the SIMDX collection.
     @inlinable public init<Other>(other: Other) where Other: Sequence, Element == Other.Element {
-        self.init(rawValue: Storage.init(other))
+        self.init(rawValue: .init(other))
     }
 
     /// Creates an instance initialized with the given elements.
@@ -151,7 +151,7 @@ extension SIMDX where Storage: SignedNumericStorage {
 
     /// Replaces this value with its additive inverse.
     @inlinable public mutating func negate() {
-        self = -self
+        self.rawValue = -(self.rawValue)
     }
 }
 
@@ -259,18 +259,18 @@ extension SIMDX where Storage: FixedWidthIntegerStorage {
 
 extension SIMDX where Storage: FloatingPointStorage {
 
-    @inlinable public init<Source>(
-        _ value: Source
-    ) where Source: SIMDX, Source.Storage: NumericStorage, Source.Storage.Element: BinaryInteger {
-        self.init(rawValue: Storage.init(value.rawValue))
-    }
-
-    @inlinable public init?<Source>(
-        exactly value: Source
-    ) where Source: SIMDX, Source.Storage: NumericStorage, Source.Storage.Element: BinaryInteger {
-        guard let rawValue = Storage.init(exactly: value.rawValue) else { return nil }
-        self.init(rawValue: rawValue)
-    }
+//    @inlinable public init<Source>(
+//        _ value: Source
+//    ) where Source: SIMDX, Source.Storage: NumericStorage, Source.Storage.Element: BinaryInteger {
+//        self.init(rawValue: Storage.init(value.rawValue))
+//    }
+//
+//    @inlinable public init?<Source>(
+//        exactly value: Source
+//    ) where Source: SIMDX, Source.Storage: NumericStorage, Source.Storage.Element: BinaryInteger {
+//        guard let rawValue = Storage.init(exactly: value.rawValue) else { return nil }
+//        self.init(rawValue: rawValue)
+//    }
 
     @inlinable public static var infinity: Self {
         .init(rawValue: .infinity)

@@ -76,7 +76,7 @@ final class CXUInt32x4Tests: XCTestCase {
 
     func testConvertFromFloat32x4() {
         let fromStorage = CXFloat32x4Make(2.49, 0.51, 1.5, .pi)
-        let storage = CXUInt32x4FromCXFloat32x4(fromStorage)
+        let storage = CXUInt32x4FromFloat32x4(fromStorage)
 
         XCTAssertEqual(CXUInt32x4GetElement(storage, 0), 2)
         XCTAssertEqual(CXUInt32x4GetElement(storage, 1), 1)
@@ -86,7 +86,7 @@ final class CXUInt32x4Tests: XCTestCase {
 
     func testConvertFromInt32x4() {
         let fromStorage = CXInt32x4Make(2, 5, .max, .min)
-        let storage = CXUInt32x4FromCXInt32x4(fromStorage)
+        let storage = CXUInt32x4FromInt32x4(fromStorage)
 
         XCTAssertEqual(CXUInt32x4GetElement(storage, 0), 2)
         XCTAssertEqual(CXUInt32x4GetElement(storage, 1), 5)

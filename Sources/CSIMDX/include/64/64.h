@@ -14,26 +14,15 @@
 
 #pragma once
 
-//#include "128/Int8x16.h"
-//#include "128/UInt8x16.h"
+//#include "64/Int8x8.h"
+//#include "64/UInt8x8.h"
 //
-////#include "128/Float16x8.h"
-//#include "128/Int16x8.h"
-//#include "128/UInt16x8.h"
+////#include "64/Float16x4.h"
+//#include "64/Int16x4.h"
+//#include "64/UInt16x4.h"
 
-// <Type>x3 are not native, but very common (3D, RGB, ...).
-// Therefore, they have a destinct definition within the module.
-// The most significant 32-bits are unused and ignored in all operations.
-#include "128/Float32x3.h"
-#include "128/Int32x3.h"
-#include "128/UInt32x3.h"
+#include "64/Float32x2.h"
+#include "64/Int32x2.h"
+#include "64/UInt32x2.h"
 
-#include "128/Float32x4.h"
-#include "128/Int32x4.h"
-#include "128/UInt32x4.h"
-
-#include "128/Float64x2.h"
-#include "128/Int64x2.h"
-#include "128/UInt64x2.h"
-
-#include "128/Conversion.h"
+#include "64/Conversion.h"

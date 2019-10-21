@@ -60,7 +60,7 @@ final class CXUInt64x2Tests: XCTestCase {
 
     func testConvertFromFloat32x2() {
         let fromStorage = CXFloat32x2Make(2.49, 0.51)
-        let storage = CXUInt64x2FromCXFloat32x2(fromStorage)
+        let storage = CXUInt64x2FromFloat32x2(fromStorage)
 
         XCTAssertEqual(CXUInt64x2GetElement(storage, 0), 2)
         XCTAssertEqual(CXUInt64x2GetElement(storage, 1), 0)
@@ -68,7 +68,7 @@ final class CXUInt64x2Tests: XCTestCase {
 
     func testConvertFromInt32x2() {
         let fromStorage = CXInt32x2Make(-34, 12)
-        let storage = CXUInt64x2FromCXInt32x2(fromStorage)
+        let storage = CXUInt64x2FromInt32x2(fromStorage)
 
         XCTAssertEqual(CXUInt64x2GetElement(storage, 0), UInt64.max - 34 + 1) // Overflow
         XCTAssertEqual(CXUInt64x2GetElement(storage, 1), 12)
@@ -76,7 +76,7 @@ final class CXUInt64x2Tests: XCTestCase {
 
     func testConvertFromUInt32x2() {
         let fromStorage = CXUInt32x2Make(2, 5)
-        let storage = CXUInt64x2FromCXUInt32x2(fromStorage)
+        let storage = CXUInt64x2FromUInt32x2(fromStorage)
 
         XCTAssertEqual(CXUInt64x2GetElement(storage, 0), 2)
         XCTAssertEqual(CXUInt64x2GetElement(storage, 1), 5)
@@ -84,7 +84,7 @@ final class CXUInt64x2Tests: XCTestCase {
 
     func testConvertFromFloat64x2() {
         let fromStorage = CXFloat64x2Make(2.0000000, 1.9999999)
-        let storage = CXUInt64x2FromCXFloat64x2(fromStorage)
+        let storage = CXUInt64x2FromFloat64x2(fromStorage)
 
         XCTAssertEqual(CXUInt64x2GetElement(storage, 0), 2)
         XCTAssertEqual(CXUInt64x2GetElement(storage, 1), 2)
@@ -92,7 +92,7 @@ final class CXUInt64x2Tests: XCTestCase {
 
     func testConvertFromInt64x2() {
         let fromStorage = CXInt64x2Make(34, 12)
-        let storage = CXUInt64x2FromCXInt64x2(fromStorage)
+        let storage = CXUInt64x2FromInt64x2(fromStorage)
 
         XCTAssertEqual(CXUInt64x2GetElement(storage, 0), 34)
         XCTAssertEqual(CXUInt64x2GetElement(storage, 1), 12)

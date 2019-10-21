@@ -23,6 +23,12 @@ public protocol RawStorage2: RawStorage {
     init(_ index0: Element, _ index1: Element)
 }
 
+extension RawStorage2 {
+    @inlinable public var count: Int { 2 }
+    @inlinable public var startIndex: Int32 { 0 }
+    @inlinable public var endIndex: Int32 { 2 }
+}
+
 /// A storage type of exactly 3 values
 public protocol RawStorage3: RawStorage {
 
@@ -30,11 +36,23 @@ public protocol RawStorage3: RawStorage {
     init(_ index0: Element, _ index1: Element, _ index2: Element)
 }
 
+extension RawStorage3 {
+    @inlinable public var count: Int { 3 }
+    @inlinable public var startIndex: Int32 { 0 }
+    @inlinable public var endIndex: Int32 { 3 }
+}
+
 /// A storage type of exactly 4 values
 public protocol RawStorage4: RawStorage {
 
     /// Initialize a raw SIMD storage to specified elements.
     init(_ index0: Element, _ index1: Element, _ index2: Element, _ index3: Element)
+}
+
+extension RawStorage4 {
+    @inlinable public var count: Int { 4 }
+    @inlinable public var startIndex: Int32 { 0 }
+    @inlinable public var endIndex: Int32 { 4 }
 }
 
 /// A storage type of exactly 5 values
@@ -45,12 +63,24 @@ public protocol RawStorage5: RawStorage {
          _ index4: Element)
 }
 
+extension RawStorage5 {
+    @inlinable public var count: Int { 5 }
+    @inlinable public var startIndex: Int32 { 0 }
+    @inlinable public var endIndex: Int32 { 5 }
+}
+
 /// A storage type of exactly 6 values
 public protocol RawStorage6: RawStorage {
 
     /// Initialize a raw SIMD storage to specified elements.
     init(_ index0: Element, _ index1: Element, _ index2: Element, _ index3: Element,
          _ index4: Element, _ index5: Element)
+}
+
+extension RawStorage6 {
+    @inlinable public var count: Int { 6 }
+    @inlinable public var startIndex: Int32 { 0 }
+    @inlinable public var endIndex: Int32 { 6 }
 }
 
 /// A storage type of exactly 7 values
@@ -61,12 +91,24 @@ public protocol RawStorage7: RawStorage {
          _ index4: Element, _ index5: Element, _ index6: Element)
 }
 
+extension RawStorage7 {
+    @inlinable public var count: Int { 7 }
+    @inlinable public var startIndex: Int32 { 0 }
+    @inlinable public var endIndex: Int32 { 7 }
+}
+
 /// A storage type of exactly 8 values
 public protocol RawStorage8: RawStorage {
 
     /// Initialize a raw SIMD storage to specified elements.
     init(_ index0: Element, _ index1: Element, _ index2: Element, _ index3: Element,
          _ index4: Element, _ index5: Element, _ index6: Element, _ index7: Element)
+}
+
+extension RawStorage8 {
+    @inlinable public var count: Int { 8 }
+    @inlinable public var startIndex: Int32 { 0 }
+    @inlinable public var endIndex: Int32 { 8 }
 }
 
 // MARK: Storables

@@ -1,48 +1,4 @@
-// 1. (ARM) NEON has no restrictions. If NEON is available, use NEON intrinsics.
-// 2. SSE2/AVX (et al) must not be used if NEON is available. This is not possible,
-//    but it does not hurt to be defined in the module map.
-// 3. SSE2/AVX (et al) dependencies are aligned with their release/dependency cycle.
-//    So if AVX is available, SSE2 is available. If AVX2 is available, AVX is available
-//    therefore SSE2 is available - and so on.
-// 4. Generic vectors, while still targetted to perform really good, mostly (if not
-//    always) result in the worst performance. Therefore, they are not available if
-//    any of the afore mentioned instruction set is available.
-
 module CSIMDX {
-
-    // MARK: ARM
-
-    module arm_128 {
-        requires neon
-        requires aarch64
-        header "modules/arm/128.h"
-    }
-
-    // MARK: x86
-
-    module x86_128 {
-        requires sse2
-        requires !arm_128
-        header "modules/x86/128.h"
-    }
-
-//    module x86_256 {
-//        requires avx
-//        requires x86_128
-//        header "modules/x86/avx.h"
-//    }
-
-    // MARK: Fallback in C
-
-    module generic_128 {
-        requires !arm_128
-        requires !x86_128
-        header "modules/generic/128.h"
-    }
-
-//    module generic_256 {
-//        requires !x86_256
-//        header "modules/generic/256.h"
-//    }
+    header "CSIMDX.h"
 }
 

@@ -60,7 +60,7 @@ final class CXFloat64x2Tests: XCTestCase {
 
     func testConvertFromFloat32x2() {
         let fromStorage = CXFloat32x2Make(2.11199999999999, 1.54321987654321)
-        let storage = CXFloat64x2FromCXFloat32x2(fromStorage)
+        let storage = CXFloat64x2FromFloat32x2(fromStorage)
 
         let firstRange = 2.11199999999999 - Float64(Float32.ulpOfOne) ... 2.11199999999999 + Float64(Float32.ulpOfOne)
         let secondRange = 1.54321987654321 - Float64(Float32.ulpOfOne) ... 1.54321987654321 + Float64(Float32.ulpOfOne)
@@ -70,7 +70,7 @@ final class CXFloat64x2Tests: XCTestCase {
 
     func testConvertFromInt32x2() {
         let fromStorage = CXInt32x2Make(-2, 1)
-        let storage = CXFloat64x2FromCXInt32x2(fromStorage)
+        let storage = CXFloat64x2FromInt32x2(fromStorage)
 
         XCTAssertEqual(CXFloat64x2GetElement(storage, 0), -2.00000000000000)
         XCTAssertEqual(CXFloat64x2GetElement(storage, 1), 1.00000000000000)
@@ -78,7 +78,7 @@ final class CXFloat64x2Tests: XCTestCase {
 
     func testConvertFromUInt32x2() {
         let fromStorage = CXUInt32x2Make(2, 5)
-        let storage = CXFloat64x2FromCXUInt32x2(fromStorage)
+        let storage = CXFloat64x2FromUInt32x2(fromStorage)
 
         XCTAssertEqual(CXFloat64x2GetElement(storage, 0), 2)
         XCTAssertEqual(CXFloat64x2GetElement(storage, 1), 5)
@@ -86,7 +86,7 @@ final class CXFloat64x2Tests: XCTestCase {
 
     func testConvertFromInt64x2() {
         let fromStorage = CXInt64x2Make(-34, 12)
-        let storage = CXFloat64x2FromCXInt64x2(fromStorage)
+        let storage = CXFloat64x2FromInt64x2(fromStorage)
 
         XCTAssertEqual(CXFloat64x2GetElement(storage, 0), -34)
         XCTAssertEqual(CXFloat64x2GetElement(storage, 1), 12)
@@ -94,7 +94,7 @@ final class CXFloat64x2Tests: XCTestCase {
 
     func testConvertFromUInt64x2() {
         let fromStorage = CXUInt64x2Make(34, 12)
-        let storage = CXFloat64x2FromCXUInt64x2(fromStorage)
+        let storage = CXFloat64x2FromUInt64x2(fromStorage)
 
         XCTAssertEqual(CXFloat64x2GetElement(storage, 0), 34)
         XCTAssertEqual(CXFloat64x2GetElement(storage, 1), 12)

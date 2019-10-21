@@ -60,7 +60,7 @@ final class CXInt64x2Tests: XCTestCase {
 
     func testConvertFromFloat32x2() {
         let fromStorage = CXFloat32x2Make(2.49, 0.51)
-        let storage = CXInt64x2FromCXFloat32x2(fromStorage)
+        let storage = CXInt64x2FromFloat32x2(fromStorage)
 
         XCTAssertEqual(CXInt64x2GetElement(storage, 0), 2)
         XCTAssertEqual(CXInt64x2GetElement(storage, 1), 0)
@@ -68,7 +68,7 @@ final class CXInt64x2Tests: XCTestCase {
 
     func testConvertFromInt32x2() {
         let fromStorage = CXInt32x2Make(-34, 12)
-        let storage = CXInt64x2FromCXInt32x2(fromStorage)
+        let storage = CXInt64x2FromInt32x2(fromStorage)
 
         XCTAssertEqual(CXInt64x2GetElement(storage, 0), -34)
         XCTAssertEqual(CXInt64x2GetElement(storage, 1), 12)
@@ -76,7 +76,7 @@ final class CXInt64x2Tests: XCTestCase {
 
     func testConvertFromUInt32x2() {
         let fromStorage = CXUInt32x2Make(2, 5)
-        let storage = CXInt64x2FromCXUInt32x2(fromStorage)
+        let storage = CXInt64x2FromUInt32x2(fromStorage)
 
         XCTAssertEqual(CXInt64x2GetElement(storage, 0), 2)
         XCTAssertEqual(CXInt64x2GetElement(storage, 1), 5)
@@ -84,7 +84,7 @@ final class CXInt64x2Tests: XCTestCase {
 
     func testConvertFromFloat64x2() {
         let fromStorage = CXFloat64x2Make(2.0000000, 1.9999999)
-        let storage = CXInt64x2FromCXFloat64x2(fromStorage)
+        let storage = CXInt64x2FromFloat64x2(fromStorage)
 
         XCTAssertEqual(CXInt64x2GetElement(storage, 0), 2)
         XCTAssertEqual(CXInt64x2GetElement(storage, 1), 1)
@@ -92,7 +92,7 @@ final class CXInt64x2Tests: XCTestCase {
 
     func testConvertFromUInt64x2() {
         let fromStorage = CXUInt64x2Make(34, 12)
-        let storage = CXInt64x2FromCXUInt64x2(fromStorage)
+        let storage = CXInt64x2FromUInt64x2(fromStorage)
 
         XCTAssertEqual(CXInt64x2GetElement(storage, 0), 34)
         XCTAssertEqual(CXInt64x2GetElement(storage, 1), 12)
@@ -124,8 +124,8 @@ final class CXInt64x2Tests: XCTestCase {
         let normal = CXInt64x2Make(-1, 3)
         let absolute = CXInt64x2Absolute(normal)
 
-        XCTAssertEqual(CXUInt64x2GetElement(absolute, 0), 1)
-        XCTAssertEqual(CXUInt64x2GetElement(absolute, 1), 3)
+        XCTAssertEqual(CXInt64x2GetElement(absolute, 0), 1)
+        XCTAssertEqual(CXInt64x2GetElement(absolute, 1), 3)
     }
 
     func testNegate() {
