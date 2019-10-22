@@ -77,7 +77,7 @@ extension UInt64x2 {
 // MARK: - Arithmetics
 extension UInt64x2 {
 
-    @inlinable public static var zero: UInt64x2 { CXUInt64x2MakeZero() }
+    @inlinable public static var zero: UInt64x2 { .init(0) }
 
     @inlinable public var magnitude: UInt64x2 { CXUInt64x2Absolute(self) }
 

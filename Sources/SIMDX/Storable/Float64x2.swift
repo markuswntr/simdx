@@ -59,7 +59,7 @@ extension Float64x2 {
 // MARK: - Arithmetics
 extension Float64x2 {
 
-    @inlinable public static var zero: Float64x2 { CXFloat64x2MakeZero() }
+    @inlinable public static var zero: Float64x2 { .init(0) }
 
     @inlinable public var magnitude: Float64x2 { CXFloat64x2Absolute(self) }
 

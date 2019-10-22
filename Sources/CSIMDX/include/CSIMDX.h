@@ -14,16 +14,12 @@
 
 #pragma once
 
-#ifndef __has_extension
-#define __has_extension(feature) 0
+#if !__has_extension(attribute_ext_vector_type)
+#error This library requires the extended vector types of clang to be available on the target hardware
 #endif
 
-#ifndef __has_builtin
-#define __has_builtin(feature) 0
-#endif
-
-#include "Common/Definitions.h"
-#include "Common/Numerics.h"
+#include "common/Definitions.h"
+#include "common/Numerics.h"
 
 #include "64/64.h"
 #include "128/128.h"

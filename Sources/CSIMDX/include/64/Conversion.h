@@ -14,9 +14,6 @@
 
 #pragma once
 
-/// Returns the number of numerics in given array
-#define SIZE(array) (sizeof(array) / sizeof(array[0]))
-
 #if !CX_ARM_ARCH && CX_X86_ARCH < CX_X86_LEVEL_SSE
 #   include <math.h>
 #endif
@@ -28,12 +25,13 @@
 CX_INLINE Float32x2 CXFloat32x2FromInt32x2(Int32x2 operand) {
     Float32x2 result;
 #if CX_ARM_ARCH
-    result.intrinsic = vcvt_f32_s32(operand.intrinsic);
-#elif CX_X86_ARCH >= CX_X86_LEVEL_SSE
-    result.intrinsic = _mm_cvtepi32_ps(_mm_movpi64_epi64(operand.intrinsic));
+    result.intrinsic = vcvt_f32_s32(operand.rawValue);
+#elif CX_HAS_CONVERTVECTOR
+    result.rawValue = __builtin_convertvector(operand.rawValue, CXFloat32x2_t);
 #else
-    CX_VECTORIZE for (size_t i = 0; i < SIZE(result.array); i++) {
-        result.array[i] = (Float32)(operand.array[i]);
+    #pragma clang loop vectorize(enable) interleave(enable)
+     for (size_t i = 0; i < 2; i++) {
+        result.array[i] = (Float32)(operand[i]);
     }
 #endif
     return result;
@@ -44,12 +42,13 @@ CX_INLINE Float32x2 CXFloat32x2FromInt32x2(Int32x2 operand) {
 CX_INLINE Float32x2 CXFloat32x2FromUInt32x2(UInt32x2 operand) {
     Float32x2 result;
 #if CX_ARM_ARCH
-    result.intrinsic = vcvt_f32_u32(operand.intrinsic);
-#elif CX_X86_ARCH >= CX_X86_LEVEL_SSE
-    result.intrinsic = _mm_cvtepi32_ps(_mm_movpi64_epi64(operand.intrinsic));
+    result.intrinsic = vcvt_f32_u32(operand.rawValue);
+#elif CX_HAS_CONVERTVECTOR
+    result.rawValue = __builtin_convertvector(operand.rawValue, CXFloat32x2_t);
 #else
-    CX_VECTORIZE for (size_t i = 0; i < SIZE(result.array); i++) {
-        result.array[i] = (Float32)(operand.array[i]);
+    #pragma clang loop vectorize(enable) interleave(enable)
+     for (size_t i = 0; i < 2; i++) {
+        result.array[i] = (Float32)(operand[i]);
     }
 #endif
     return result;
@@ -62,12 +61,13 @@ CX_INLINE Float32x2 CXFloat32x2FromUInt32x2(UInt32x2 operand) {
 CX_INLINE Int32x2 CXInt32x2FromFloat32x2(Float32x2 operand) {
     Int32x2 result;
 #if CX_ARM_ARCH
-    result.intrinsic = vcvt_s32_f32(operand.intrinsic);
-#elif CX_X86_ARCH >= CX_X86_LEVEL_SSE
-    result.intrinsic = _mm_movepi64_pi64(_mm_cvtps_epi32(operand.intrinsic));
+    result.rawValue = vcvt_s32_f32(operand.intrinsic);
+#elif CX_HAS_CONVERTVECTOR
+    result.rawValue = __builtin_convertvector(operand.rawValue, CXInt32x2_t);
 #else
-    CX_VECTORIZE for (size_t i = 0; i < SIZE(result.array); i++) {
-        result.array[i] = (Int32)nearbyintf(operand.array[0]);
+    #pragma clang loop vectorize(enable) interleave(enable)
+     for (size_t i = 0; i < 2; i++) {
+        result.rawValue[i] = (Int32)nearbyintf(operand.array[0]);
     }
 #endif
     return result;
@@ -78,12 +78,13 @@ CX_INLINE Int32x2 CXInt32x2FromFloat32x2(Float32x2 operand) {
 CX_INLINE Int32x2 CXInt32x2FromUInt32x2(UInt32x2 operand) {
     Int32x2 result;
 #if CX_ARM_ARCH
-    result.intrinsic = vreinterpret_s32_u32(operand.intrinsic);
-#elif CX_X86_ARCH >= CX_X86_LEVEL_SSE
-    result.intrinsic = operand.intrinsic;
+    result.rawValue = vreinterpret_s32_u32(operand.rawValue);
+#elif CX_HAS_CONVERTVECTOR
+    result.rawValue = __builtin_convertvector(operand.rawValue, CXInt32x2_t);
 #else
-    CX_VECTORIZE for (size_t i = 0; i < SIZE(result.array); i++) {
-        result.array[i] = (Int32)operand.array[0];
+    #pragma clang loop vectorize(enable) interleave(enable)
+     for (size_t i = 0; i < 2; i++) {
+        result.rawValue[i] = (Int32)operand.rawValue[0];
     }
 #endif
     return result;
@@ -96,12 +97,13 @@ CX_INLINE Int32x2 CXInt32x2FromUInt32x2(UInt32x2 operand) {
 CX_INLINE UInt32x2 CXUInt32x2FromFloat32x2(Float32x2 operand) {
     UInt32x2 result;
 #if CX_ARM_ARCH
-    result.intrinsic = vcvt_u32_f32(operand.intrinsic);
-#elif CX_X86_ARCH >= CX_X86_LEVEL_SSE
-    result.intrinsic = _mm_movepi64_pi64(_mm_cvtps_epi32(operand.intrinsic));
+    result.rawValue = vcvt_u32_f32(operand.intrinsic);
+#elif CX_HAS_CONVERTVECTOR
+    result.rawValue = __builtin_convertvector(operand.rawValue, CXUInt32x2_t);
 #else
-    CX_VECTORIZE for (size_t i = 0; i < SIZE(result.array); i++) {
-        result.array[i] = (UInt32)nearbyintf(operand.array[0]);
+    #pragma clang loop vectorize(enable) interleave(enable)
+     for (size_t i = 0; i < 2; i++) {
+        result.rawValue[i] = (UInt32)nearbyintf(operand.array[0]);
     }
 #endif
     return result;
@@ -112,14 +114,14 @@ CX_INLINE UInt32x2 CXUInt32x2FromFloat32x2(Float32x2 operand) {
 CX_INLINE UInt32x2 CXUInt32x2FromInt32x2(Int32x2 operand) {
     UInt32x2 result;
 #if CX_ARM_ARCH
-    result.intrinsic = vreinterpret_u32_s32(operand.intrinsic);
-#elif CX_X86_ARCH >= CX_X86_LEVEL_SSE
-    result.intrinsic = operand.intrinsic;
+    result.rawValue = vreinterpret_u32_s32(operand.rawValue);
+#elif CX_HAS_CONVERTVECTOR
+    result.rawValue = __builtin_convertvector(operand.rawValue, CXUInt32x2_t);
 #else
-    CX_VECTORIZE for (size_t i = 0; i < SIZE(result.array); i++) {
-        result.array[i] = (UInt32)operand.array[0];
+    #pragma clang loop vectorize(enable) interleave(enable)
+     for (size_t i = 0; i < 2; i++) {
+        result.rawValue[i] = (UInt32)operand[0];
     }
 #endif
     return result;
 }
-#undef SIZE

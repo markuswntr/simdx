@@ -1,5 +1,5 @@
 import XCTest
-import CSIMDX
+@testable import CSIMDX
 
 final class CXFloat32x2Tests: XCTestCase {
 
@@ -25,13 +25,6 @@ final class CXFloat32x2Tests: XCTestCase {
 
         XCTAssertEqual(CXFloat32x2GetElement(storage, 0), 3)
         XCTAssertEqual(CXFloat32x2GetElement(storage, 1), 3)
-    }
-
-    func testMakeZero() {
-        let storage = CXFloat32x2MakeZero()
-
-        XCTAssertEqual(CXFloat32x2GetElement(storage, 0), 0)
-        XCTAssertEqual(CXFloat32x2GetElement(storage, 1), 0)
     }
 
     // MARK: Access
@@ -184,7 +177,6 @@ final class CXFloat32x2Tests: XCTestCase {
         ("testMake", testMake),
         ("testMakeLoad", testMakeLoad),
         ("testMakeRepeatingElement", testMakeRepeatingElement),
-        ("testMakeZero", testMakeZero),
         ("testGetElement", testGetElement),
         ("testSetElement", testSetElement),
         ("testConvertFromFloat64x2", testConvertFromFloat64x2),

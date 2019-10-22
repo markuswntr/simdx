@@ -99,6 +99,7 @@ Move TODOs to Issues and/or a Project at some point
 - [x] Make `count` on SIMDX static
 - [ ] Extension on Array `init(SIMDX)` that uses native intrinsics store
 - [ ] Horizontal sum
+- [ ] Remove BitwiseAndNot from csimdx (no intrinsic anymore)
 - [ ] Documentation
 - [ ] Comparison (Equal, GreaterThan, LowerThan, ...)
 - [ ] Move Storable structs into C and Swift Shim only

@@ -19,26 +19,14 @@
 //  - https://clang.llvm.org/docs/LanguageExtensions.html
 // ======================================================
 
-/// Some instructions may fallback to clang provided extended vector support if available.
-#define CX_HAS_EXT_VECTOR __has_extension(attribute_ext_vector_type)
+/// Function pre-fix to make it static and to try force inlining it by the compiler.
+#define CX_INLINE __inline__ __attribute__((__always_inline__, __nodebug__)) static
 
+/// Whether the target hardware supports the builtin convertvector
 #define CX_HAS_CONVERTVECTOR __has_builtin(__builtin_convertvector)
 
+/// Whether the target hardware supports the builtin shufflevector
 #define CX_HAS_SHUFFLEVECTOR __has_builtin(__builtin_shufflevector)
-
-/// Instruct clang to vectorize the following loop
-#define CX_VECTORIZE _Pragma("clang loop vectorize(enable)")
-
-// MARK: Attributes
-
-/// The vector size of the type in number of bytes
-#define CX_VECTOR_SIZE(size) __attribute__((__vector_size__(size)))
-
-/// Alignment of the attributed type
-#define CX_ALIGN(alignment) __attribute__((aligned(alignment)))
-
-/// Function pre-fix to make it static and to try force inlining it by the compiler. Takes the return value as input.
-#define CX_INLINE __inline__ __attribute__((__always_inline__, __nodebug__)) static
 
 // MARK: Arm
 // == References ===============================================================================
@@ -80,7 +68,7 @@
 #define CX_X86_LEVEL_AVX_2      55
 
 // TBD
-#define CX_X86_LEVEL_AVX_512    60
+#define CX_X86_LEVEL_AVX_512    1000 
 //#define __AVX512CD__ 1
 //#define __AVX512ER__ 1
 //#define __AVX512F__ 1

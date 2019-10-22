@@ -1,5 +1,5 @@
 import XCTest
-import SIMDX
+@testable import SIMDX
 
 final class SIMDX3Tests: XCTestCase {
 

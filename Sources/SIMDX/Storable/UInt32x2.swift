@@ -77,7 +77,7 @@ extension UInt32x2 {
 // MARK: - Arithmetics
 extension UInt32x2 {
 
-    @inlinable public static var zero: UInt32x2 { CXUInt32x2MakeZero() }
+    @inlinable public static var zero: UInt32x2 { .init(0) }
 
     @inlinable public var magnitude: UInt32x2 { CXUInt32x2Absolute(self) }
 

@@ -1,6 +1,6 @@
 import XCTest
-import CSIMDXTests
-import SIMDXTests
+@testable import CSIMDXTests
+@testable import SIMDXTests
 
 var tests: [XCTestCaseEntry] = []
 tests += CSIMDXTests.allTests()

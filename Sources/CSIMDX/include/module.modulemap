@@ -1,4 +1,3 @@
 module CSIMDX {
     header "CSIMDX.h"
 }
-
